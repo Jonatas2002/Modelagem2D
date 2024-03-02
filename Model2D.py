@@ -104,7 +104,7 @@ while shot !=len(rec) + 1:
 #---------------------------------------------------------
 
 # Plot dos modelos
-plt.figure()
+plt.figure(figsize = (21,7))
 
 plt.subplot(131)
 plt.title('VP (m/s)')
