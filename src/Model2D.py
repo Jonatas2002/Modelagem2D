@@ -104,7 +104,7 @@ while shot !=len(rec) + 1:
 #---------------------------------------------------------
 
 # Plot dos modelos
-plt.figure(figsize = (24,8))
+plt.figure()
 
 plt.subplot(131)
 plt.title('VP (m/s)')
@@ -150,7 +150,7 @@ src_table[:, 0] = srcindex
 src_table[:, 1] = srcindex
 src_table[:, 2] = src
 src_table[:, 3] = z_src
-np.savetxt('src_table', src_table, fmt = '%.2f')
+np.savetxt('Tabela de Fontes', src_table, fmt = '%.2f')
 
 # Criando e salvando tabela de receptores
 rec_table = np.zeros((len(rec), 4))
@@ -158,4 +158,4 @@ rec_table[:, 0] = reciveindex
 rec_table[:, 1] = reciveindex
 rec_table[:, 2] = rec
 rec_table[:, 3] = z_rec
-np.savetxt('rec_table', rec_table, fmt = '%.2f')
+np.savetxt('Tabela de Receptores', rec_table, fmt = '%.2f')
