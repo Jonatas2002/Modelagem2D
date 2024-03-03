@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from function import model_paralelo_2D
 
 #---------------------------------------------------------
 #---------------------------------------------------------
@@ -23,18 +24,10 @@ rhob = np.array([957, 1223, 1354, 1575, 1702])
 #---------------------------------------------------------
 #---------------------------------------------------------
 
-# Inicialização de matrizes 2D
-VP = np.zeros((nz, nx))
-VS = np.zeros((nz, nx))
-RHOB = np.zeros((nz, nx))
-
-# Preenchimento das matrizes 2D
-for i in range(len(prof)):
-    start_depth = int(prof[i - 1] / dx) if i > 0 else 0
-    end_depth = prof[i] // dx
-    VP[start_depth:end_depth, :] = vp[i]
-    VS[start_depth:end_depth, :] = vs[i]
-    RHOB[start_depth:end_depth, :] = rhob[i]
+# Construindo modelos
+VP = model_paralelo_2D(nz, nx, dx, prof, vp)
+VS = model_paralelo_2D(nz, nx, dx, prof, vs)
+RHOB = model_paralelo_2D(nz, nx, dx, prof, rhob)
 
 #---------------------------------------------------------
 #---------------------------------------------------------
