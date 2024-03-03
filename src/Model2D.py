@@ -16,7 +16,7 @@ RHOB = np.zeros(nz)
 
 depth = np.arange(nz) * dx
 
-prof = np.array([100, 120, 300, 400, nx*dx])
+prof = np.array([100, 120, 300, 400, nz*dx])
 vp = np.array([300, 800, 1200, 2200, 3000])
 vs = np.array([173, 462, 693, 1270, 1732])
 rhob = np.array([957, 1223, 1354, 1575, 1702])
