@@ -52,7 +52,7 @@ rec = np.arange(offset_min, offset_max + 1, 10)
 
 # Profundidade do receptor      
 z_rec = np.zeros(len(rec))
-z_rec[:] = 100
+z_rec[:] = prof[0]
 
 reciveindex = np.arange(1, len(rec) + 1, 1)
 
