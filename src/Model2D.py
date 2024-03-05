@@ -125,3 +125,5 @@ rec_table[:, 1] = reciveindex
 rec_table[:, 2] = rec
 rec_table[:, 3] = z_rec
 np.savetxt('Tabela de Receptores', rec_table, fmt = '%.2f')
+
+# teste
