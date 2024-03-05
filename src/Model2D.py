@@ -70,6 +70,8 @@ plt.plot(rec, z_rec, '*', color='yellow', label='Receptor', markersize= 4)
 plt.xlabel('Distâcia (m)')
 plt.ylabel('Profundidade (m)')
 plt.legend(fontsize='small')
+#plt.colorbar(label='VP (m/s)')
+
 
 
 plt.subplot(132)
@@ -81,6 +83,8 @@ plt.xlabel('Distâcia (m)')
 plt.yticks([])
 plt.legend(fontsize='small')
 #plt.ylabel('Profundidade (m)')
+#plt.colorbar(label='VS (m/s)')
+
 
 plt.subplot(133)
 plt.title('RHOB (kg/m³)')
@@ -91,6 +95,8 @@ plt.xlabel('Distâcia (m)')
 plt.yticks([])
 plt.legend(fontsize='small')
 #plt.ylabel('Profundidade (m)')
+#plt.colorbar(label='RHOB (Kg/m³)')
+
 
 plt.savefig('2DModels.png')
 plt.tight_layout()
