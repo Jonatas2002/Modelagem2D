@@ -123,12 +123,14 @@ VS.T.astype('float32', order= 'F').tofile(f'vs_2D_{nz}x{nx}_{dx:.0f}m.bin')
 RHOB.T.astype('float32', order= 'F').tofile(f'rhob_2D_{nz}x{nx}_{dx:.0f}m.bin')
 
 # Criando e salvando tabela de fontesd
+formats = ['%d', '%d', '%.2f', '%.2f']
+
 src_table = np.zeros((len(src), 4))
 src_table[:, 0] = srcindex
 src_table[:, 1] = srcindex
 src_table[:, 2] = src
 src_table[:, 3] = z_src
-np.savetxt('Tabela de Fontes', src_table, fmt = '%.2f')
+np.savetxt('Tabela de Fontes', src_table, delimiter=',', fmt=formats)
 
 # Criando e salvando tabela de receptores
 rec_table = np.zeros((len(rec1), 4))
@@ -136,7 +138,7 @@ rec_table[:, 0] = reciveindex
 rec_table[:, 1] = reciveindex
 rec_table[:, 2] = rec1
 rec_table[:, 3] = z_rec
-np.savetxt('Tabela de Receptores', rec_table, fmt = '%.2f')
+np.savetxt('Tabela de Receptores', rec_table, delimiter=',', fmt=formats)
 
 #---------------------------------------------------------
 #---------------------------------------------------------
@@ -153,3 +155,4 @@ plt.ylabel('Profundidade (m)')
 plt.legend(fontsize='small')
 plt.colorbar(label='VP (m/s)')
 plt.show()
+
