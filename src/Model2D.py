@@ -80,9 +80,9 @@ tabela_relacao[:,2] = (offset_max*2/8)+1
 #---------------------------------------------------------
 
 # Plot dos modelos - Vizualização geral dos 3 modelos
-plt.figure()
+plt.figure(figsize=(10,10))
 
-plt.subplot(131)
+plt.subplot(311)
 plt.title('VP (m/s)')
 plt.imshow(VP, aspect='auto', extent= (0, nx*dx, nz*dz, 0), cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
@@ -90,10 +90,10 @@ plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.xlabel('Distâcia (m)')
 plt.ylabel('Profundidade (m)')
 plt.legend(fontsize='small')
-#plt.colorbar(label='VP (m/s)')
+plt.colorbar(label='VP (m/s)')
 
 
-plt.subplot(132)
+plt.subplot(312)
 plt.title('VS (m/s)')
 plt.imshow(VS, aspect='auto', extent= (0, nx*dx, nz*dz, 0),  cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
@@ -101,11 +101,11 @@ plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.xlabel('Distâcia (m)')
 plt.yticks([])
 plt.legend(fontsize='small')
-#plt.ylabel('Profundidade (m)')
-#plt.colorbar(label='VS (m/s)')
+plt.ylabel('Profundidade (m)')
+plt.colorbar(label='VS (m/s)')
 
 
-plt.subplot(133)
+plt.subplot(313)
 plt.title('RHOB (kg/m³)')
 plt.imshow(RHOB, aspect='auto', extent= (0, nx*dx, nz*dz, 0), cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
@@ -113,8 +113,8 @@ plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.xlabel('Distâcia (m)')
 plt.yticks([])
 plt.legend(fontsize='small')
-#plt.ylabel('Profundidade (m)')
-#plt.colorbar(label='RHOB (Kg/m³)')
+plt.ylabel('Profundidade (m)')
+plt.colorbar(label='RHOB (Kg/m³)')
 
 
 plt.savefig('2DModels.png')
@@ -152,18 +152,3 @@ np.savetxt('tabela_relacao', tabela_relacao, delimiter=',', fmt='%d')
 
 #---------------------------------------------------------
 #---------------------------------------------------------
-
-# Vizualização do perfil VP
-plt.figure()
-
-plt.title('VP (m/s)')
-plt.imshow(VP, aspect='auto', extent= (0, nx*dx, nz*dx, 0), cmap='jet')
-plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
-plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
-plt.xlabel('Distâcia (m)')
-plt.ylabel('Profundidade (m)')
-plt.legend(fontsize='small')
-plt.colorbar(label='VP (m/s)')
-plt.show()
-
-print(len(src))
