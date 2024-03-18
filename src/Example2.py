@@ -84,15 +84,15 @@ z_rec[72:] = z_rec2
 plt.figure(figsize=(10,8))
 plt.subplot(311)
 plt.imshow(VP, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
-plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
-plt.plot(rec, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
+#plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
+#plt.plot(rec, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 
 plt.title('Velocidade P')
 #plt.yticks([])  # Remova as marcações do eixo y
 plt.xlabel('Distância (m)')
 plt.ylabel('Profundidade (m)')
 plt.colorbar(label='VP (m/s)')
-plt.grid()
+#plt.grid()
 
 plt.subplot(312)
 plt.imshow(VS, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
