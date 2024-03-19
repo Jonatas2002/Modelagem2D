@@ -62,20 +62,48 @@ srcindex = np.arange(1, len(src) + 1, 1)
 
 #---------------------------------------------------------
 
+# offset_min = 0
+# offset_max = 576
+# rec = np.arange(src[0] - offset_max, src[0] + offset_max + 1, 8)
+
+# print(len(rec))
+
+
+# # Profundidade do receptor
+# z_rec = np.zeros(len(rec))      
+# z_rec1 = np.arange(55.616, 50 - 0.076, -0.078)
+# z_rec2 = np.arange(50, 55.616 + 0.076,  0.078)
+
+# z_rec[:73] = z_rec1
+# z_rec[72:] = z_rec2
+
+#---------------------------------------------------------
+
+# Geometria de aquisição
 offset_min = 0
 offset_max = 576
-rec = np.arange(src[0] - offset_max, src[0] + offset_max + 1, 8)
+space = 8
+# Fonte
+#src = np.array([offset_max + space/2])
+src = np.arange(576, 3424, 8)
+# profundidade da fonte
+z_src = np.zeros(len(src))
+z_src[:] = 50
 
-print(len(rec))
+srcindex = np.arange(1, len(src) + 1, space)
+
+#---------------------------------------------------------
+
+# Receptor
+rec1 = np.arange(0, 4000 + 1, space)
+
+print(len(rec1))
 
 
-# Profundidade do receptor
-z_rec = np.zeros(len(rec))      
-z_rec1 = np.arange(55.616, 50 - 0.076, -0.078)
-z_rec2 = np.arange(50, 55.616 + 0.076,  0.078)
+# Profundidade do receptor      
+z_rec = np.zeros(len(rec1))
+z_rec[:] = 50
 
-z_rec[:73] = z_rec1
-z_rec[72:] = z_rec2
 
 #-------------------------------------------------------------------------------------#
 #-------------------------------------------------------------------------------------#
@@ -84,8 +112,8 @@ z_rec[72:] = z_rec2
 plt.figure(figsize=(10,8))
 plt.subplot(311)
 plt.imshow(VP, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
-#plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
-#plt.plot(rec, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
+plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
+plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 
 plt.title('Velocidade P')
 #plt.yticks([])  # Remova as marcações do eixo y
@@ -96,6 +124,8 @@ plt.colorbar(label='VP (m/s)')
 
 plt.subplot(312)
 plt.imshow(VS, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
+plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
+plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.title('Velocidade S')
 #plt.yticks([])  # Remova as marcações do eixo y
 plt.xlabel('Distância (m)')
@@ -104,6 +134,8 @@ plt.colorbar(label='VS (m/s)')
 
 plt.subplot(313)
 plt.imshow(RHOB, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
+plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
+plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.title('Densidade')
 #plt.yticks([])  # Remova as marcações do eixo y
 plt.xlabel('Distância (m)')

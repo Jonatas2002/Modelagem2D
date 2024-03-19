@@ -45,8 +45,8 @@ offset_min = 0
 offset_max = 576
 space = 8
 # Fonte
-src = np.array([offset_max + space/2])
-
+#src = np.array([offset_max + space/2])
+src = np.arange(576, 3424, 8)
 # profundidade da fonte
 z_src = np.zeros(len(src))
 z_src[:] = prof[0]
@@ -60,7 +60,8 @@ srcindex = np.arange(1, len(src) + 1, space)
 #offset_max = src[0] + 480
 #rec = np.arange(offset_min, offset_max + 1, 10)
 
-rec1 = np.arange(0, (offset_max*2) + 1, space)
+#rec1 = np.arange(0, (offset_max*2) + 1, space)
+rec1 = np.arange(0, 4000 + 1, space)
 
 print(len(rec1))
 
@@ -132,23 +133,23 @@ RHOB.T.astype('float32', order= 'F').tofile(f'rhob_2D_{nz}x{nx}_{dx:.0f}m.bin')
 # Criando e salvando tabela de fontesd
 #formats = ['%d', '%d', '%.2f', '%.2f']
 
-src_table = np.zeros((len(src), 4))
-src_table[:, 0] = srcindex
-src_table[:, 1] = srcindex
-src_table[:, 2] = src
-src_table[:, 3] = z_src
-np.savetxt('Tabela de fonte', src_table, delimiter=',', fmt='%.2f')
+# src_table = np.zeros((len(src), 4))
+# src_table[:, 0] = srcindex
+# src_table[:, 1] = srcindex
+# src_table[:, 2] = src
+# src_table[:, 3] = z_src
+# np.savetxt('Tabela de fonte', src_table, delimiter=',', fmt='%.2f')
 
-# Criando e salvando tabela de receptores
-rec_table = np.zeros((len(rec1), 5))
-rec_table[:, 0] = reciveindex
-rec_table[:, 1] = reciveindex
-rec_table[:, 2] = rec1
-rec_table[:, 3] = z_rec
-np.savetxt('Tabela de Receptores', rec_table, delimiter=',', fmt='%.2f')
+# # Criando e salvando tabela de receptores
+# rec_table = np.zeros((len(rec1), 5))
+# rec_table[:, 0] = reciveindex
+# rec_table[:, 1] = reciveindex
+# rec_table[:, 2] = rec1
+# rec_table[:, 3] = z_rec
+# np.savetxt('Tabela de Receptores', rec_table, delimiter=',', fmt='%.2f')
 
-# Criando e salvando tabela de relação
-np.savetxt('tabela_relacao', tabela_relacao, delimiter=',', fmt='%d')
+# # Criando e salvando tabela de relação
+# np.savetxt('tabela_relacao', tabela_relacao, delimiter=',', fmt='%d')
 
-#---------------------------------------------------------
-#---------------------------------------------------------
+# #---------------------------------------------------------
+# #---------------------------------------------------------
