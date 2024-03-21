@@ -80,7 +80,7 @@ def horizon_sin(nz, nx, z0, height, L):
     LL = (L * nx)
     
     for i in range(nx):
-        horizon[i] = int(Z0 + HEIGHT * np.sin(2*np.pi*(i) / LL + np.pi))
+        horizon[i] = int(Z0 + HEIGHT * np.sinc(2*np.pi*(i) / LL + np.pi))
         
     return horizon
 
@@ -120,6 +120,32 @@ def matriz_falha(nz, nx, velocidade, horizonte, valor, If, Ff):
             if (j >= horizonte[i]):
                 velocidade[j,If:Ff] = valor
     return velocidade
+
+#---------------------------------------------------------------
+#---------------------------------------------------------------
+
+# Definindo função gaussiana
+def horizon_gauss(nz, nx, z0, amplitude, desvio):
+    """
+    Cria um horizonte em forma de gaussiana em uma matriz unidimensional.
+    
+    Parâmetros:
+    - nz: Tamanho da matriz na direção vertical
+    - nx: Tamanho da matriz na direção horizontal
+    - z0: Posição central do horizonte na direção vertical
+    - amplitude: Amplitude máxima do horizonte
+    - desvio: Desvio padrão da gaussiana (controla a largura do horizonte)
+    
+    Retorna:
+    - horizon: Matriz unidimensional representando o horizonte em forma de gaussiana
+    """
+    horizon = np.zeros(nx, dtype='int')
+    
+    for i in range(nx):
+        x = i - z0
+        horizon[i] = int(amplitude * np.exp(-1000 * (x / desvio)**2))
+        
+    return horizon
 
             
        

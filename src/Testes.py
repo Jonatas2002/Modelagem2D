@@ -11,7 +11,7 @@ from function import horizon_reta
 """## Modelo de velocidade 2D """
 nx = 501
 nz = 501
-dx = 2
+dx = 1
 
 depth = np.arange(nz) * dx
 
