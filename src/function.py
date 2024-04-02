@@ -80,7 +80,7 @@ def horizon_sin(nz, nx, z0, height, L):
     LL = (L * nx)
     
     for i in range(nx):
-        horizon[i] = int(Z0 + HEIGHT * np.sinc(2*np.pi*(i) / LL + np.pi))
+        horizon[i] = int(Z0 + HEIGHT * np.sin(2*np.pi*(i) / LL + np.pi))
         
     return horizon
 

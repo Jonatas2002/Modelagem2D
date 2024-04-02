@@ -30,21 +30,21 @@ horizon4 = horizon_sin(nz, nx, z0=1.18, height=37.5, L=2.0)
 
 VP = np.zeros((nz, nx)) + vp[0]
 VP = matriz_complexa(nz, nx, VP, horizon1, vp[1])
-VP = matriz_complexa(nz, nx, VP, horizon2, vp[2])
-VP = matriz_complexa(nz, nx, VP, horizon3, vp[3])
-VP = matriz_complexa(nz, nx, VP, horizon4, vp[4])
+#VP = matriz_complexa(nz, nx, VP, horizon2, vp[2])
+#VP = matriz_complexa(nz, nx, VP, horizon3, vp[3])
+#VP = matriz_complexa(nz, nx, VP, horizon4, vp[4])
 
 VS = np.zeros((nz, nx)) + vs[0]
 VS = matriz_complexa(nz, nx, VS, horizon1, vs[1])
-VS = matriz_complexa(nz, nx, VS, horizon2, vs[2])
-VS = matriz_complexa(nz, nx, VS, horizon3, vs[3])
-VS = matriz_complexa(nz, nx, VS, horizon4, vs[4])
+#VS = matriz_complexa(nz, nx, VS, horizon2, vs[2])
+#VS = matriz_complexa(nz, nx, VS, horizon3, vs[3])
+#VS = matriz_complexa(nz, nx, VS, horizon4, vs[4])
 
 RHOB = np.zeros((nz, nx)) + rhob[0]
 RHOB = matriz_complexa(nz, nx, RHOB, horizon1, rhob[1])
-RHOB = matriz_complexa(nz, nx, RHOB, horizon2, rhob[2])
-RHOB = matriz_complexa(nz, nx, RHOB, horizon3, rhob[3])
-RHOB = matriz_complexa(nz, nx, RHOB, horizon4, rhob[4])
+#RHOB = matriz_complexa(nz, nx, RHOB, horizon2, rhob[2])
+#RHOB = matriz_complexa(nz, nx, RHOB, horizon3, rhob[3])
+#RHOB = matriz_complexa(nz, nx, RHOB, horizon4, rhob[4])
 
 
 #-------------------------------------------------------------------------------------#
@@ -61,48 +61,45 @@ z_src[:] = 50
 srcindex = np.arange(1, len(src) + 1, 1)
 
 #---------------------------------------------------------
-
-# offset_min = 0
-# offset_max = 576
-# rec = np.arange(src[0] - offset_max, src[0] + offset_max + 1, 8)
-
-# print(len(rec))
-
-
-# # Profundidade do receptor
-# z_rec = np.zeros(len(rec))      
-# z_rec1 = np.arange(55.616, 50 - 0.076, -0.078)
-# z_rec2 = np.arange(50, 55.616 + 0.076,  0.078)
-
-# z_rec[:73] = z_rec1
-# z_rec[72:] = z_rec2
-
 #---------------------------------------------------------
 
 # Geometria de aquisição
+interfacex = np.zeros(len(VP[0]))
+
+for distance in range(len(VP[0])):
+    for i in range(len(VP)):
+        if VP[i, distance] < vp[1] and VP[i + 1, distance] >= vp[1]:
+            interfacey = i * dx
+            break  
+    interfacex[distance] = interfacey
+    
+    
 offset_min = 0
 offset_max = 576
 space = 8
+
 # Fonte
-#src = np.array([offset_max + space/2])
 src = np.arange(576, 3424, 8)
 # profundidade da fonte
-z_src = np.zeros(len(src))
-z_src[:] = 50
-
+#z_src = np.zeros(len(src))
+#z_src[:] = 50
+z_src = []
+for i in range(576, 3424, 8):
+    z_src.append(interfacex[i])
 srcindex = np.arange(1, len(src) + 1, space)
 
 #---------------------------------------------------------
 
 # Receptor
-rec1 = np.arange(0, 4000 + 1, space)
-
-print(len(rec1))
-
+rec1 = np.arange(0, 4000, space)
 
 # Profundidade do receptor      
-z_rec = np.zeros(len(rec1))
-z_rec[:] = 50
+#z_rec = np.zeros(len(rec1))
+#z_rec[:] = 50
+z_rec = []
+
+for i in range(7, len(interfacex), 8):
+    z_rec.append(interfacex[i])
 
 
 #-------------------------------------------------------------------------------------#
@@ -110,24 +107,21 @@ z_rec[:] = 50
 
 # Plot dos graficos
 plt.figure(figsize=(10,8))
+
 plt.subplot(311)
 plt.imshow(VP, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
 plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
-
 plt.title('Velocidade P')
-#plt.yticks([])  # Remova as marcações do eixo y
 plt.xlabel('Distância (m)')
 plt.ylabel('Profundidade (m)')
 plt.colorbar(label='VP (m/s)')
-#plt.grid()
 
 plt.subplot(312)
 plt.imshow(VS, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
 plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.title('Velocidade S')
-#plt.yticks([])  # Remova as marcações do eixo y
 plt.xlabel('Distância (m)')
 plt.ylabel('Profundidade (m)')
 plt.colorbar(label='VS (m/s)')
@@ -137,7 +131,6 @@ plt.imshow(RHOB, aspect='auto',extent=(0, nx*dx, nz*dx, 0), cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
 plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.title('Densidade')
-#plt.yticks([])  # Remova as marcações do eixo y
 plt.xlabel('Distância (m)')
 plt.ylabel('Profundidade (m)')
 plt.colorbar(label='RHOB (kg/m³)')
@@ -145,4 +138,7 @@ plt.colorbar(label='RHOB (kg/m³)')
 plt.tight_layout()
 plt.show()
 
-
+#-------------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------------------#
