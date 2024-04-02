@@ -69,7 +69,7 @@ interfacex = np.zeros(len(VP[0]))
 for distance in range(len(VP[0])):
     for i in range(len(VP)):
         if VP[i, distance] < vp[1] and VP[i + 1, distance] >= vp[1]:
-            interfacey = i * dx
+            interfacey = i * dx + 2
             break  
     interfacex[distance] = interfacey
     
@@ -142,3 +142,5 @@ plt.show()
 #-------------------------------------------------------------------------------------#
 #-------------------------------------------------------------------------------------#
 #-------------------------------------------------------------------------------------#
+teste = VP[86,:]
+print(z_rec)
