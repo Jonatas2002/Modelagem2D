@@ -43,6 +43,7 @@ def reflected_wave(velocity2, offset_max, space, distance, dt0, nx ):
     deslocamento = offset_max - velocity2 * dt0  # Conferir no sismograma qual velocidade usar
 
     h = (velocity2 * dt0)/2
-    t = np.sqrt((x-deslocamento)**2 + 4*h**2)/velocity2
-
+    t0 = (2*h) / velocity2
+    #t = np.sqrt((x-deslocamento)**2 + 4*h**2)/velocity2
+    t = ((((x - deslocamento)**2) / velocity2**2) + t0**2)
     return x, t

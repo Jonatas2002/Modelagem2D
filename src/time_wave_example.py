@@ -11,22 +11,21 @@ dt0 = 0.1
 offset_max = 576
 space = 8
 
-v1 = 800
-v2 = 300
-v3 = 462
+vp = np.array([300, 800, 1200, 2200, 3000])
+vs = np.array([173, 462, 693, 1270, 1732])
 
 # onda direta
-x1, t1 = direct_wave(v1, dtf, dt0, offset_max, space, nx)
-x2, t2 = direct_wave(v2, dtf, dt0, offset_max, space, nx)
-x3, t3 = direct_wave(v3, dtf, dt0, offset_max, space, nx)
+x1, t1 = direct_wave(vp[0], dtf, dt0, offset_max, space, nx)
+x2, t2 = direct_wave(vp[1], dtf, dt0, offset_max, space, nx)
+x3, t3 = direct_wave(vs[1], dtf, dt0, offset_max, space, nx)
 
 # Onda refratada
-x_refr, t_refr = refracted_waves(v1, v2, offset_max, space, dtf, dt0, nx)
+x_refr, t_refr = refracted_waves(vp[1], vp[2], offset_max, space, dtf, dt0, nx)
 
 # Onda refletida
-dt0_refl = 0.2
-x_refl1, t_refl1 = reflected_wave(v1, offset_max, space, dtf, dt0_refl, nx )
-x_refl2, t_refl2 = reflected_wave(v3, offset_max, space, dtf, dt0_refl, nx )
+dt0_refl = 0.4
+x_refl1, t_refl1 = reflected_wave(vp[2], offset_max, space, dtf, dt0_refl, nx )
+x_refl2, t_refl2 = reflected_wave(vp[3], offset_max, space, dtf, dt0_refl, nx )
 
 plt.figure(figsize=(10,10))
 # plot onda direta
@@ -52,4 +51,13 @@ plt.plot(-x_refl2 + 1160,t_refl2, 'orange')
 plt.grid()
 plt.ylim(0.8, 0)
 
+plt.show()
+
+
+# Carregar a imagem usando plt.imread()
+ma = plt.imread('teste.png')
+print(ma.shape)
+
+# Exibir a imagem usando matshow
+plt.matshow(ma, cmap='gray', extent=(0, 145*8, 0.8, 0), aspect='auto')  # Defina o mapa de cores para 'gray' para exibir em escala de cinza
 plt.show()
