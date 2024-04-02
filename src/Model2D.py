@@ -8,8 +8,8 @@ from function import model_paralelo_2D
 ## Parametros
 x = 4000
 z = 400
-dx = 10
-dz = 10
+dx = 1
+dz = 1
 nx = int(x/dx +1)
 nz = int(z/dz +1)
 
@@ -24,10 +24,10 @@ depth = np.arange(nz) * dz
 #vs = np.array([173, 462, 693, 1270, 1732])
 #rhob = np.array([957, 1223, 1354, 1575, 1702])
 
-prof = np.array([100,200, nz*dz])
-vp = np.array([300, 800, 1200])
-vs = np.array([173, 462, 693])
-rhob = np.array([957, 1223, 1354])
+prof = np.array([50, nz*dz])
+vp = np.array([300, 800])
+vs = np.array([173, 462])
+rhob = np.array([957, 1223])
 
 #---------------------------------------------------------
 #---------------------------------------------------------
@@ -63,7 +63,7 @@ srcindex = np.arange(1, len(src) + 1, space)
 #rec1 = np.arange(0, (offset_max*2) + 1, space)
 rec1 = np.arange(0, 4000 + 1, space)
 
-print(len(rec1))
+#print(len(rec1))
 
 
 # Profundidade do receptor      
@@ -100,7 +100,7 @@ plt.imshow(VS, aspect='auto', extent= (0, nx*dx, nz*dz, 0),  cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
 plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.xlabel('Distâcia (m)')
-plt.yticks([])
+#plt.yticks([])
 plt.legend(fontsize='small')
 plt.ylabel('Profundidade (m)')
 plt.colorbar(label='VS (m/s)')
@@ -112,7 +112,7 @@ plt.imshow(RHOB, aspect='auto', extent= (0, nx*dx, nz*dz, 0), cmap='jet')
 plt.plot(src, z_src, 'v', color='red', label='Fonte', markersize= 6)
 plt.plot(rec1, z_rec, '*', color='yellow', label='Receptor', markersize= 2)
 plt.xlabel('Distâcia (m)')
-plt.yticks([])
+#plt.yticks([])
 plt.legend(fontsize='small')
 plt.ylabel('Profundidade (m)')
 plt.colorbar(label='RHOB (Kg/m³)')
@@ -153,3 +153,6 @@ RHOB.T.astype('float32', order= 'F').tofile(f'rhob_2D_{nz}x{nx}_{dx:.0f}m.bin')
 
 # #---------------------------------------------------------
 # #---------------------------------------------------------
+
+teste = VP[50,:]
+print(teste)
