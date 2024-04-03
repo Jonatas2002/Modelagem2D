@@ -1,17 +1,16 @@
 # Importar as bibliotecas
 import numpy as np
 import matplotlib.pyplot as plt
-
-from function import horizon_cos
 from function import horizon_sin
 from function import matriz_complexa
-from function import matriz_falha
-from function import horizon_reta
+
 
 """## Modelo de velocidade 2D """
-nx = 4001
-nz = 401
+x = 4000
+z = 400
 dx = 1
+nx = int(x/dx + 1)
+nz = int(z/dx + 1)
 
 depth = np.arange(nz) * dx
 
@@ -51,57 +50,31 @@ RHOB = matriz_complexa(nz, nx, RHOB, horizon1, rhob[1])
 #-------------------------------------------------------------------------------------#
 # Geometria de aquisição
 
-# Fonte
-src = np.array([2000])
-
-# profundidade da fonte
-z_src = np.zeros(len(src))
-z_src[:] = 50
-
-srcindex = np.arange(1, len(src) + 1, 1)
-
-#---------------------------------------------------------
-#---------------------------------------------------------
-
-# Geometria de aquisição
-interfacex = np.zeros(len(VP[0]))
-
-for distance in range(len(VP[0])):
-    for i in range(len(VP)):
-        if VP[i, distance] < vp[1] and VP[i + 1, distance] >= vp[1]:
-            interfacey = i * dx + 2
-            break  
-    interfacex[distance] = interfacey
-    
-    
 offset_min = 0
 offset_max = 576
 space = 8
 
 # Fonte
-src = np.arange(576, 3424, 8)
+src = np.arange(offset_max + space, (x - offset_max + space), space)
+
 # profundidade da fonte
-#z_src = np.zeros(len(src))
-#z_src[:] = 50
 z_src = []
-for i in range(576, 3424, 8):
-    z_src.append(interfacex[i])
+for i in range(offset_max + space, (x - offset_max + space), space):
+    z_src.append(horizon1[i])
 srcindex = np.arange(1, len(src) + 1, space)
 
 #---------------------------------------------------------
 
 # Receptor
-rec1 = np.arange(0, 4000, space)
+rec1 = np.arange(space, x + 1, space)
 
 # Profundidade do receptor      
-#z_rec = np.zeros(len(rec1))
-#z_rec[:] = 50
 z_rec = []
 
-for i in range(7, len(interfacex), 8):
-    z_rec.append(interfacex[i])
+for i in range(7, len(horizon1), 8):
+    z_rec.append(horizon1[i])
 
-
+reciveindex = np.arange(1, len(rec1) + 1, 1)
 #-------------------------------------------------------------------------------------#
 #-------------------------------------------------------------------------------------#
 
