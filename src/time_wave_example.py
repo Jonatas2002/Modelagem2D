@@ -37,9 +37,9 @@ plt.plot(-x1 + 1160, t1, 'blue')
 plt.plot(-x2 + 1160, t2, 'red')
 plt.plot(-x3 + 1160, t3, 'green')
 
-# plot onda refratada
-plt.plot(x_refr, t_refr, 'black')  # Está sobre t2
-plt.plot(-x_refr + 1160, t_refr, 'black')  # Está sobre t2
+# # plot onda refratada
+# plt.plot(x_refr, t_refr, 'black')  # Está sobre t2
+# plt.plot(-x_refr + 1160, t_refr, 'black')  # Está sobre t2
 
 # plot onda relfetida
 plt.plot(x_refl1,t_refl1, 'yellow')
@@ -51,13 +51,4 @@ plt.plot(-x_refl2 + 1160,t_refl2, 'orange')
 plt.grid()
 plt.ylim(0.8, 0)
 
-plt.show()
-
-
-# Carregar a imagem usando plt.imread()
-ma = plt.imread('teste.png')
-print(ma.shape)
-
-# Exibir a imagem usando matshow
-plt.matshow(ma, cmap='gray', extent=(0, 145*8, 0.8, 0), aspect='auto')  # Defina o mapa de cores para 'gray' para exibir em escala de cinza
 plt.show()
