@@ -29,20 +29,20 @@ horizon4 = horizon_sin(nz, nx, z0=1.18, height=37.5, L=2.0)
 
 VP = np.zeros((nz, nx)) + vp[0]
 VP = matriz_complexa(nz, nx, VP, horizon1, vp[1])
-#VP = matriz_complexa(nz, nx, VP, horizon2, vp[2])
-#VP = matriz_complexa(nz, nx, VP, horizon3, vp[3])
+VP = matriz_complexa(nz, nx, VP, horizon2, vp[2])
+VP = matriz_complexa(nz, nx, VP, horizon3, vp[3])
 #VP = matriz_complexa(nz, nx, VP, horizon4, vp[4])
 
 VS = np.zeros((nz, nx)) + vs[0]
 VS = matriz_complexa(nz, nx, VS, horizon1, vs[1])
-#VS = matriz_complexa(nz, nx, VS, horizon2, vs[2])
-#VS = matriz_complexa(nz, nx, VS, horizon3, vs[3])
+VS = matriz_complexa(nz, nx, VS, horizon2, vs[2])
+VS = matriz_complexa(nz, nx, VS, horizon3, vs[3])
 #VS = matriz_complexa(nz, nx, VS, horizon4, vs[4])
 
 RHOB = np.zeros((nz, nx)) + rhob[0]
 RHOB = matriz_complexa(nz, nx, RHOB, horizon1, rhob[1])
-#RHOB = matriz_complexa(nz, nx, RHOB, horizon2, rhob[2])
-#RHOB = matriz_complexa(nz, nx, RHOB, horizon3, rhob[3])
+RHOB = matriz_complexa(nz, nx, RHOB, horizon2, rhob[2])
+RHOB = matriz_complexa(nz, nx, RHOB, horizon3, rhob[3])
 #RHOB = matriz_complexa(nz, nx, RHOB, horizon4, rhob[4])
 
 
