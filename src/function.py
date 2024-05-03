@@ -121,5 +121,31 @@ def matriz_falha(nz, nx, velocidade, horizonte, valor, If, Ff):
                 velocidade[j,If:Ff] = valor
     return velocidade
 
+#---------------------------------------------------------------
+#---------------------------------------------------------------
+
+# Definindo função gaussiana
+def horizon_gauss(nz, nx, z0, amplitude, desvio):
+    """
+    Cria um horizonte em forma de gaussiana em uma matriz unidimensional.
+    
+    Parâmetros:
+    - nz: Tamanho da matriz na direção vertical
+    - nx: Tamanho da matriz na direção horizontal
+    - z0: Posição central do horizonte na direção vertical
+    - amplitude: Amplitude máxima do horizonte
+    - desvio: Desvio padrão da gaussiana (controla a largura do horizonte)
+    
+    Retorna:
+    - horizon: Matriz unidimensional representando o horizonte em forma de gaussiana
+    """
+    horizon = np.zeros(nx, dtype='int')
+    
+    for i in range(nx):
+        x = i - z0
+        horizon[i] = int(amplitude * np.exp(-1000 * (x / desvio)**2))
+        
+    return horizon
+
             
        
